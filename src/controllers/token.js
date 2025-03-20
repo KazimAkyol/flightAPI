@@ -3,13 +3,13 @@
     NODEJS EXPRESS | Flight API
 ------------------------------------------------------- */
 
-const Flight = require("../models/flight");
+const Token = require("../models/token");
 
 module.exports = {
   list: async (req, res) => {
     /* 
-            #swagger.tags = ['Flights']
-            #swagger.summary = 'List Flights'
+            #swagger.tags = ['Tokens']
+            #swagger.summary = 'List Tokens'
             #swagger.desription = `
                 You can sen query with endpoint for filter[], search[], sort[], page and limit.
                 <ul> Examples usage:
@@ -22,22 +22,22 @@ module.exports = {
     */
     //* swagger'lari kullanabilmek icin(dökümantasyon yazabilmek icin) yorum satirinin icinde #swagger seklinde yazip ici istenildigi gibi doldurulabilir.
 
-    const result = await res.getModelList(Flight); //* daha detayli islemleri yapabilmek icin getModelList kullanildi.
+    const result = await res.getModelList(Token); //* daha detayli islemleri yapabilmek icin getModelList kullanildi.
 
     res.status(200).send({
       error: false,
-      details: await res.getModelListDetails(Flight),
+      details: await res.getModelListDetails(Token),
       result,
     });
   },
 
   create: async (req, res) => {
     /* 
-        #swagger.tags = ['Flights']
-        #swagger.summary = 'Create Flight'
+        #swagger.tags = ['Tokens']
+        #swagger.summary = 'Create Token'
     */
 
-    const result = await Flight.create(req.body);
+    const result = await Token.create(req.body);
 
     res.status(201).send({
       error: false,
@@ -47,11 +47,11 @@ module.exports = {
 
   read: async (req, res) => {
     /* 
-        #swagger.tags = ['Flights']
-        #swagger.summary = 'Get Single Flight'
+        #swagger.tags = ['Tokens']
+        #swagger.summary = 'Get Single Token'
     */
 
-    const result = await Flight.findOne({ _id: req.params.id });
+    const result = await Token.findOne({ _id: req.params.id });
 
     res.status(200).send({
       error: false,
@@ -61,11 +61,11 @@ module.exports = {
 
   update: async (req, res) => {
     /* 
-        #swagger.tags = ['Flights']
-        #swagger.summary = 'Update Flight'
+        #swagger.tags = ['Tokens']
+        #swagger.summary = 'Update Token'
     */
 
-    const result = await Flight.updateOne({ _id: req.params.id }, req.body, {
+    const result = await Token.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
     });
 
@@ -76,17 +76,17 @@ module.exports = {
 
     res.status(202).send({
       error: false,
-      new: await Flight.updateOne({ _id: req.params.id }),
+      new: await Token.updateOne({ _id: req.params.id }),
     });
   },
 
   delete: async (req, res) => {
     /* 
-        #swagger.tags = ['Flights']
-        #swagger.summary = 'Delete Flight'
+        #swagger.tags = ['Tokens']
+        #swagger.summary = 'Delete Token'
     */
 
-    const result = await Flight.deleteOne({ _id: req.params.id });
+    const result = await Token.deleteOne({ _id: req.params.id });
 
     res.status(result.deletedCount ? 204 : 404).send({
       error: false,
