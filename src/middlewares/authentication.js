@@ -12,10 +12,13 @@ module.exports = async (req, res, next) => {
   const tokenKey = auth ? auth.split(" ") : null;
 
   if (tokenKey && tokenKey[0] == "Bearer") {
-    jwt.verify(tokenKey[1].process.env.ACCESS_KEY, (error, accessData) => {
-      req.user = accessData ? accessData : null;
-      req.body.createdId = req.user?._id;
-    });
+    jwt.verify(
+      tokenKey[1].process.env.ACCESS_KEY,
+      function (error, accessData) {
+        req.user = accessData ? accessData : null;
+        req.body.createdId = req.user?._id;
+      }
+    );
   }
 
   next();

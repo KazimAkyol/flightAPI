@@ -45,6 +45,7 @@ module.exports = {
 
     //* Yukaridaki her iki if blogunda da ünlem isareti(!) kullanarak user degilse ve user.isActive degilse anlami vererek throw ile bir hata attirilir. Hata yoksa kod oldugu gibi calisir.
 
+    //* Access Token
     const accessData = {
       _id: user._id,
       username: user.username,
