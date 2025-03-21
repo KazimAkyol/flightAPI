@@ -19,7 +19,7 @@ module.exports = {
                       "password": "aA12345.?",
                   }
               }
-      */
+    */
 
     const { username, email, password } = req.body;
 
@@ -45,17 +45,35 @@ module.exports = {
 
     //* Yukaridaki her iki if blogunda da ünlem isareti(!) kullanarak user degilse ve user.isActive degilse anlami vererek throw ile bir hata attirilir. Hata yoksa kod oldugu gibi calisir.
 
-    let tokenData = await Token.findOne({ userId: user._id });
+    const accessData = {
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      isActive: user.isActive,
+      isAdmin: user.isAdmin,
+    };
 
-    if (!tokenData) {
-      tokenData = await Token.create({
-        userId: user._id,
-        token: passwordEncrypt(Date.now() + user._id),
-      });
-    }
+    const accessToken = jwt.sign(accessData, process.env.ACCESS_KEY, {
+      expiresIn: "15m",
+    });
+
+    //* Refresh Token:
+    const refreshData = {
+      _id: user._id,
+      password: user.password,
+    };
+
+    const refreshToken = jwt.sign(refreshData, process.env.REFRESH_KEY, {
+      expiresIn: "1d",
+    });
 
     res.status(200).send({
       error: false,
+      bearer: {
+        //* jwt ile beraber kullanilir.
+        acces: accessToken,
+        refresh: refreshToken,
+      },
       token: tokenData.token,
       user,
     });
@@ -65,7 +83,7 @@ module.exports = {
     /*
           #swagger.tags = ["Tokens"]
           #swagger.summary = "Create Token"
-      */
+    */
 
     const result = req.user
       ? await Token.deleteOne({ userId: req.user._id })

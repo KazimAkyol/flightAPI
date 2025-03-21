@@ -3,19 +3,19 @@
     NODEJS EXPRESS | Flight API
 ------------------------------------------------------- */
 
-const Token = require("../models/token");
+const jwt = require("jsonwebtoken");
 
 module.exports = async (req, res, next) => {
   req.user = null;
 
-  const auth = req.headers?.authorization; // Token ...tokenKey...
-  const tokenKey = auth ? auth.split(" ") : null; // ['Token', '...tokenKey...']
+  const auth = req.headers?.authorization || null;
+  const tokenKey = auth ? auth.split(" ") : null;
 
-  if (tokenKey && tokenKey[0] == "Token") {
-    const tokenData = await Token.findOne({ token: tokenKey[1] }).populate(
-      "userId"
-    ); //* DB'de token'a ait bilgileri saklayan function populate()'tir.
-    req.user = tokenData ? tokenData.userId : null;
+  if (tokenKey && tokenKey[0] == "Bearer") {
+    jwt.verify(tokenKey[1].process.env.ACCESS_KEY, (error, accessData) => {
+      req.user = accessData ? accessData : null;
+      req.body.createdId = req.user?._id;
+    });
   }
 
   next();
