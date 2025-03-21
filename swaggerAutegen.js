@@ -14,7 +14,7 @@ const document = {
     version: packageJson.version,
     title: packageJson.title,
     description: packageJson.description,
-    termsOfService: "http://www.clarusway.com",
+    termsOfService: "akyolkzm.2016493@gmail.com",
     contact: { name: packageJson.author, email: "ali@clarusway.com" },
     license: { name: packageJson.license },
   },
