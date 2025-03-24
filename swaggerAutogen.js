@@ -1,6 +1,6 @@
 "use strict";
 /* -------------------------------------------------------
-    EXPRESS - Personnel API
+    EXPRESS - Flight API
 ------------------------------------------------------- */
 require("dotenv").config();
 const HOST = process.env?.HOST || "127.0.0.1";
@@ -28,7 +28,7 @@ const document = {
       in: "header",
       name: "Authorization",
       description:
-        "Enter Your AccessToken (JWT) for Login. Example: <b>Bearer <i>...token...<i></b>",
+        "Enter Your AccessToken (JWT) for Login. Example: <b>Bearer</b>",
     },
   },
   security: [{ JWT: true }],
