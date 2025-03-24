@@ -8,7 +8,7 @@ const { mongoose } = require("../configs/dbConnection");
 const FlightSchema = new mongoose.Schema(
   {
     flightNumber: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       ref: "User",
       required: true,
       unique: true,
@@ -27,9 +27,19 @@ const FlightSchema = new mongoose.Schema(
       required: true,
     },
 
+    departureDate: {
+      type: Date,
+      required: true,
+    },
+
     arrival: {
       type: String,
       trim: true,
+      required: true,
+    },
+
+    departureDate: {
+      type: Date,
       required: true,
     },
   },

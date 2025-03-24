@@ -9,10 +9,24 @@ const ReservationSchema = new mongoose.Schema(
   {
     flightId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Passenger",
+      ref: "Flight",
       required: true,
       unique: true,
       index: true,
+    },
+
+    passengers: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
+    ],
+
+    createdId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
   },
   {

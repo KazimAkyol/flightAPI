@@ -35,6 +35,12 @@ const PassengerSchema = new mongoose.Schema(
         "Email is not valid",
       ],
     },
+
+    createdId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   {
     collection: "passengers",
