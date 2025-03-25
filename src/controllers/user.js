@@ -34,6 +34,17 @@ module.exports = {
     /* 
         #swagger.tags = ['Users']
         #swagger.summary = 'Create User'
+        #swagger.parameters['body']={
+            in:"body",
+            require:true,
+            schema:{
+            "username": {type:String, example:"test"},
+            "password": "1234",
+            "email": "test@site.com",
+            "isActive": true,
+            "isStaff": false,
+            "isAdmin": false,    
+            },
     */
 
     if (
@@ -73,6 +84,17 @@ module.exports = {
     /* 
         #swagger.tags = ['Users']
         #swagger.summary = 'Update User'
+        #swagger.parameters['body']={
+            in:"body",
+            require:true,
+            schema:{
+            "username": "test",
+            "password": "1234",
+            "email": "test@site.com",
+            "isActive": true,
+            "isStaff": false,
+            "isAdmin": false,    
+            },
     */
 
     const result = await User.updateOne({ _id: req.params.id }, req.body, {

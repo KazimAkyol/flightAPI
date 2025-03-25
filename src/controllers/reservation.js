@@ -1,6 +1,6 @@
 "use strict";
 /* -------------------------------------------------------
-    NODEJS EXPRESS | Flight API
+    NODEJS EXPRESS | Reservation API
 ------------------------------------------------------- */
 
 const Reservation = require("../models/reservation");
@@ -33,14 +33,51 @@ module.exports = {
 
   create: async (req, res) => {
     /* 
-        #swagger.tags = ['Reservations']
-        #swagger.summary = 'Create Reservation'
+        #swagger.tags=["Reservations"]
+        #swagger.summary="Create Reservations"
+        #swagger.parameters['body']={
+            in:"body",
+            required:true,
+            schema:{
+                $ref: '#/definitions/Reservation',
+            },
     */
+
+    const passengerInfos = req.body.passengers || [];
+    const passengerIds = [];
+    let passenger = {};
+
+    for (let passengerInfo of passengerInfos) {
+      if (typeof passengerInfo == "object") {
+        passenger = await Passenger.findOne({ email: passengerInfo.email });
+
+        if (passenger) {
+          passengerIds.push(passenger._id);
+        } else {
+          // create a new Passenger
+
+          passenger = await Passenger.create({
+            ...passengerInfo,
+            createdId: req.user._id,
+          });
+
+          if (passenger) {
+            passengerIds.push(passenger._id);
+          }
+        }
+      } else if (typeof passengerInfo == "string") {
+        passenger = await Passenger.findOne({ _id: passengerInfo });
+        if (passenger) passengerIds.push(passenger._id);
+      }
+    }
+
+    req.body.passengers = passengerIds;
 
     const result = await Reservation.create(req.body);
 
-    res.status(201).send({
+    res.status(200).send({
       error: false,
+      details: await res.getModelListDetails(Reservation),
       result,
     });
   },
@@ -63,11 +100,21 @@ module.exports = {
     /* 
         #swagger.tags = ['Reservations']
         #swagger.summary = 'Update Reservation'
+        #swagger.parameters['body']={
+            in:"body",
+            required:true,
+            schema:{
+                $ref:'#/definitions/Reservation',
+            },
     */
 
-    const result = await Reservation.updateOne({ _id: req.params.id }, req.body, {
-      runValidators: true,
-    });
+    const result = await Reservation.updateOne(
+      { _id: req.params.id },
+      req.body,
+      {
+        runValidators: true,
+      }
+    );
 
     if (result.modifiedCount) {
       res.errorStatusCode = 404;

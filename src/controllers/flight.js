@@ -32,9 +32,24 @@ module.exports = {
   },
 
   create: async (req, res) => {
+    //   { "flightNumber": "IS-AN-001",
+    //     "airline": "THY",
+    //     "departure": "ANKARA",
+    //     "departureDate": "2020-10-01 10:00:00",
+    //     "arrival": "ANKARA",
+    //     "arrivalDate": "2020-10-01 12:00:00",
+    //     "createdId": "652ceaa1bae9cde5e8a97522"
+    // }
+
     /* 
         #swagger.tags = ['Flights']
         #swagger.summary = 'Create Flight'
+        #swagger.parameters['body']={
+            in:"body",
+            required:true,
+            schema:{
+                $ref:'#/definitions/Flight',
+            },
     */
 
     const result = await Flight.create(req.body);
@@ -63,6 +78,12 @@ module.exports = {
     /* 
         #swagger.tags = ['Flights']
         #swagger.summary = 'Update Flight'
+        #swagger.parameters['body']={
+            in:"body",
+            required:true,
+            schema:{
+                 $ref:'#/definitions/Flight',
+            },
     */
 
     const result = await Flight.updateOne({ _id: req.params.id }, req.body, {

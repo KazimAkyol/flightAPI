@@ -27,7 +27,7 @@ module.exports = {
   },
 
   isStaff: (req, res, next) => {
-    if (req.user && req.user.isStaff) {
+    if (req.user && req.user.isActive && req.user.isStaff) {
       next(); //* Yetkiliyse devam et
     } else {
       res.errorStatusCode = 403;

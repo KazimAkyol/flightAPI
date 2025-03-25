@@ -35,6 +35,12 @@ module.exports = {
     /* 
         #swagger.tags = ['Passengers']
         #swagger.summary = 'Create Passenger'
+        #swagger.parameters['body']={
+            in:"body",
+            required:true,
+            schema:{
+                $ref: '#/definitions/Passenger',
+            },
     */
 
     const result = await Passenger.create(req.body);
@@ -63,6 +69,12 @@ module.exports = {
     /* 
         #swagger.tags = ['Passengers']
         #swagger.summary = 'Update Passenger'
+        #swagger.parameters['body']={
+            in:"body",
+            require:true,
+            schema:{
+                $ref:'#/definitions/Passenger',
+            },
     */
 
     const result = await Passenger.updateOne({ _id: req.params.id }, req.body, {

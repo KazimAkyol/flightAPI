@@ -145,8 +145,20 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "201": {
             "description": "Created"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -201,6 +213,12 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -268,6 +286,12 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -306,8 +330,20 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "201": {
             "description": "Created"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -362,6 +398,12 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -429,6 +471,12 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -467,8 +515,20 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "201": {
             "description": "Created"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -523,6 +583,12 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -590,6 +656,12 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -611,7 +683,7 @@
         "tags": [
           "Reservations"
         ],
-        "summary": "Create Reservation",
+        "summary": "Create Reservations",
         "description": "",
         "parameters": [
           {
@@ -622,14 +694,26 @@
               "properties": {
                 "createdId": {
                   "example": "any"
+                },
+                "passengers": {
+                  "example": "any"
                 }
               }
             }
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -684,6 +768,12 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -751,6 +841,12 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -843,6 +939,34 @@
               "example": true
             }
           }
+        },
+        "arrivalDate": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "createdId": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "ref": {
+              "type": "string",
+              "example": "User"
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            }
+          }
         }
       }
     },
@@ -862,6 +986,10 @@
             "required": {
               "type": "boolean",
               "example": true
+            },
+            "unique": {
+              "type": "boolean",
+              "example": true
             }
           }
         },
@@ -878,6 +1006,10 @@
             "required": {
               "type": "boolean",
               "example": true
+            },
+            "unique": {
+              "type": "boolean",
+              "example": true
             }
           }
         },
@@ -887,10 +1019,20 @@
             "type": {
               "type": "function"
             },
-            "trim": {
-              "type": "boolean",
-              "example": true
+            "enum": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "1": {
+                    "type": "string"
+                  },
+                  "2": {
+                    "type": "string"
+                  }
+                }
+              }
             },
+            "default": {},
             "required": {
               "type": "boolean",
               "example": true
@@ -919,7 +1061,7 @@
               "type": "array",
               "example": [
                 null,
-                "Email is not valid"
+                "Please enter a valid email address."
               ],
               "items": {
                 "type": "string"
@@ -965,10 +1107,6 @@
             "unique": {
               "type": "boolean",
               "example": true
-            },
-            "index": {
-              "type": "boolean",
-              "example": true
             }
           }
         },
@@ -979,10 +1117,6 @@
             "properties": {
               "type": {
                 "type": "function"
-              },
-              "ref": {
-                "type": "string",
-                "example": "User"
               },
               "required": {
                 "type": "boolean",

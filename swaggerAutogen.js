@@ -32,7 +32,7 @@ const document = {
     },
   },
   security: [{ JWT: true }],
-  definition: {
+  definitions: {
     Flight: require("./src/models/flight").schema.obj,
     Passenger: require("./src/models/passenger").schema.obj,
     Reservation: require("./src/models/reservation").schema.obj,
