@@ -11,17 +11,20 @@ const PassengerSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
+      unique: true,
     },
 
     lastName: {
       type: String,
       trim: true,
       required: true,
+      unique: true,
     },
 
     gender: {
       type: String,
-      trim: true,
+      enum: [null, "M", "F"],
+      default: null,
       required: true,
     },
 
@@ -31,8 +34,8 @@ const PassengerSchema = new mongoose.Schema(
       required: true,
       unique: true,
       validate: [
-        (email) => email.includes("@") && email.includes("."),
-        "Email is not valid",
+        (email) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email),
+        "Please enter a valid email address.",
       ],
     },
 

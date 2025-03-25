@@ -38,8 +38,14 @@ const FlightSchema = new mongoose.Schema(
       required: true,
     },
 
-    departureDate: {
+    arrivalDate: {
       type: Date,
+      required: true,
+    },
+
+    createdId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
       required: true,
     },
   },

@@ -12,13 +12,11 @@ const ReservationSchema = new mongoose.Schema(
       ref: "Flight",
       required: true,
       unique: true,
-      index: true,
     },
 
     passengers: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        type: String,
         required: true,
       },
     ],
