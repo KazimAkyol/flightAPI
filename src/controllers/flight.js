@@ -20,9 +20,8 @@ module.exports = {
                 </ul>
             `
     */
-    //* swagger'lari kullanabilmek icin(dökümantasyon yazabilmek icin) yorum satirinin icinde #swagger seklinde yazip ici istenildigi gibi doldurulabilir.
 
-    const result = await res.getModelList(Flight); //* daha detayli islemleri yapabilmek icin getModelList kullanildi.
+    const result = await res.getModelList(Flight);
 
     res.status(200).send({
       error: false,

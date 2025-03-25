@@ -23,7 +23,7 @@ const PassengerSchema = new mongoose.Schema(
 
     gender: {
       type: String,
-      enum: [null, "M", "F"],
+      enum: [null, "M", "F"], //* sinirli sayida secenek sunulmak istendiginde enum degiskeni kullanilir.
       default: null,
       required: true,
     },
