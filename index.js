@@ -40,7 +40,7 @@ app.use(express.json());
 app.use(require("./src/middlewares/authentication"));
 
 // Run Logger:
-app.use(require("./src/middlewares/logger"));
+// app.use(require("./src/middlewares/logger"));
 
 // Query Handler:
 app.use(require("./src/middlewares/queryHandler"));
