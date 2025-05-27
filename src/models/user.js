@@ -16,52 +16,52 @@ const passwordEncrypt = require("../helpers/passwordEncrypt");
 /* ------------------------------------------------------- */
 
 const UserSchema = new mongoose.Schema(
-  {
-    username: {
-      type: String,
-      trim: true,
-      required: true,
-      unique: true,
-    },
+    {
+        username: {
+            type: String,
+            trim: true,
+            required: true,
+            unique: true,
+        },
 
-    password: {
-      type: String,
-      trim: true,
-      required: true,
-      set: passwordEncrypt,
-    },
+        password: {
+            type: String,
+            trim: true,
+            required: true,
+            set: passwordEncrypt,
+        },
 
-    email: {
-      type: String,
-      trim: true,
-      required: true,
-      index: true,
-      unique: true,
-      validate: [
-        (email) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email),
-        "Please enter a valid email address.",
-      ],
-    },
+        email: {
+            type: String,
+            trim: true,
+            required: true,
+            index: true,
+            unique: true,
+            validate: [
+                (email) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email),
+                "Please enter a valid email address.",
+            ],
+        },
 
-    isActive: {
-      type: Boolean,
-      default: true,
-    },
+        isActive: {
+            type: Boolean,
+            default: true,
+        },
 
-    isStaff: {
-      type: Boolean,
-      default: false,
-    },
+        isStaff: {
+            type: Boolean,
+            default: false,
+        },
 
-    isAdmin: {
-      type: Boolean,
-      default: false,
+        isAdmin: {
+            type: Boolean,
+            default: false,
+        },
     },
-  },
-  {
-    collection: "users",
-    timestamps: true,
-  }
+    {
+        collection: "users",
+        timestamps: true,
+    }
 );
 
 module.exports = mongoose.model("User", UserSchema);

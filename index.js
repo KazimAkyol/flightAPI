@@ -50,12 +50,12 @@ app.use(require("./src/middlewares/queryHandler"));
 
 // HomePath:
 app.all("/", (req, res) => {
-  res.send({
-    error: false,
-    message: "Welcome to FLIGHT RESERVATION API",
-    documents: "/documents",
-    user: req.user,
-  });
+    res.send({
+        error: false,
+        message: "Welcome to FLIGHT RESERVATION API",
+        documents: "/documents",
+        user: req.user,
+    });
 });
 
 // Index Route:
