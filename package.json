@@ -10,7 +10,7 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "Clarusway",
+  "author": "Kazim Akyol",
   "license": "ISC Licence",
   "dependencies": {
     "dotenv": "^16.3.1",
